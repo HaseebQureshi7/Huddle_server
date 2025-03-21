@@ -4,7 +4,9 @@ import authRouter from "./auth/Auth.routes";
 
 const appRouter = Router();
 
-appRouter.use("/health", healthRouter);
-appRouter.use("/auth", authRouter);
+const prefix = "/api/v1";
+
+appRouter.use(prefix + "/health", healthRouter);
+appRouter.use(prefix + "/auth", authRouter);
 
 export default appRouter;

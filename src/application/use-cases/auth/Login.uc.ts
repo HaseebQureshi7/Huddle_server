@@ -1,4 +1,5 @@
 import { AuthRepository } from "../../../domain/repositories/Auth.repo";
+import { JwtService } from "../../../infrastructure/services/JWT.service";
 import { AppError } from "../../../shared/utils/AppError";
 import { LoginDTO } from "../../dtos/auth/Login.dto";
 
@@ -18,6 +19,9 @@ export class LoginUseCase {
       throw new AppError("Invalid email or password.", 401);
     }
 
-    return user;
+    const accessToken = JwtService.generateAccessToken(user.id)
+    const refreshToken = JwtService.generateRefreshToken(user.id)
+
+    return {user, accessToken, refreshToken};
   }
 }
