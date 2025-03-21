@@ -7,6 +7,8 @@ import { LoginUseCase } from "../../../application/use-cases/auth/Login.uc";
 import { AuthRepository } from "../../../domain/repositories/Auth.repo";
 import { CreateUserUseCase } from "../../../application/use-cases/auth/CreateUser.uc";
 import { catchAsync } from "../../../shared/utils/CatchAsync";
+import { RefreshTokenUseCase } from "../../../application/use-cases/user/RefreshToken.uc";
+import { cookieOptions } from "../../../infrastructure/config/cookieOptions.config";
 
 export class AuthController {
   private loginUseCase: LoginUseCase;
@@ -26,7 +28,19 @@ export class AuthController {
     });
 
     const user = await this.registerUseCase.execute(signupDTO);
-    ResponseHandler.success(res, "User registered successfully", 201, { user });
+
+    const loginDetails = new LoginDTO({
+      email: new EmailAddress(email),
+      password,
+    });
+
+    const { accessToken, refreshToken } = await this.loginUseCase.execute(loginDetails);
+
+    // Set the refresh token in cookies
+    res.cookie("accessTokens", accessToken, cookieOptions);
+    res.cookie("refreshTokens", refreshToken, cookieOptions);
+
+    ResponseHandler.success(res, "User registered successfully", 201, { user, accessToken, refreshToken });
   });
 
   login = catchAsync(async (req: Request, res: Response) => {
@@ -36,7 +50,23 @@ export class AuthController {
       password,
     });
 
-    const result = await this.loginUseCase.execute(loginDTO);
-    ResponseHandler.success(res, "Login successful", 200, result);
+    const {accessToken, refreshToken} = await this.loginUseCase.execute(loginDTO);
+
+    res.cookie("accessToken", accessToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
+
+    ResponseHandler.success(res, "Login successful", 200, {accessToken});
   });
+  
+  refreshToken = catchAsync(async (req: Request, res: Response) => {
+    const refreshTokenUseCase = new RefreshTokenUseCase();
+    const oldRefreshToken = req.cookies.refreshToken;
+
+
+    const {accessToken, refreshToken} = await refreshTokenUseCase.execute(oldRefreshToken);
+
+    res.cookie("accessToken", accessToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
+    ResponseHandler.success(res, "Tokens successfully refreshed", 200, {accessToken: accessToken, refreshToken: refreshToken});
+  })
 }

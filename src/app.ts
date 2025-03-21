@@ -5,6 +5,8 @@ import helmet from "helmet";
 import { corsOptions } from "./infrastructure/config/corsOptions.config";
 import appRouter from "./presentation/routes/index.routes";
 import { globalErrorHandler } from "./shared/utils/GlobalErrorHandler";
+import cookieParser from 'cookie-parser';
+
 config();
 
 const app = express();
@@ -12,6 +14,7 @@ const app = express();
 // middlewares
 app.use(helmet()) // For XSS / Clickjacking
 app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(json({limit: "10mb"}));
 app.use(urlencoded({limit: "10mb", extended: false}));
 
