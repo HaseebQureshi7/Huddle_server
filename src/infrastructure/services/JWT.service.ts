@@ -14,6 +14,14 @@ export class JwtService {
     return jwt.sign({ userId }, JWT_REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
   }
 
+  static verifyAccessToken(token: string): { userId: string } | null {
+    try {
+      return jwt.verify(token, JWT_ACCESS_TOKEN_SECRET) as { userId: string };
+    } catch (error) {
+      return null;
+    }
+  }
+
   static verifyRefreshToken(token: string): { userId: string } | null {
     try {
       return jwt.verify(token, JWT_REFRESH_TOKEN_SECRET) as { userId: string };

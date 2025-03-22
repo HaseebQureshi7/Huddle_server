@@ -5,6 +5,6 @@ export class ViewUserByIdUseCase {
   constructor(private userRepository: UserRepository) {}
 
   async execute(uid: string): Promise<UserEntity | null> {
-    return this.userRepository.viewById(uid);
+    return this.userRepository.findById(uid);
   }
 }

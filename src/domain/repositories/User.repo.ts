@@ -3,7 +3,7 @@ import { UserEntity } from "../entities/User.entity";
 
 export interface UserRepository {
   // CRUD
-  viewById(uid: string): Promise<UserEntity | null>;
+  findById(uid: string): Promise<UserEntity | null>;
   update(updated_data: UpdateUserDTO): Promise<UserEntity>;
   delete(uid: string): Promise<UserEntity>;
 }
