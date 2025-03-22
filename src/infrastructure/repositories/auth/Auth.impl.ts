@@ -22,6 +22,14 @@ export class AuthRepositoryImpl implements AuthRepository {
     return user ? new UserEntity(user) : null;
   }
 
+  async findUserById(uid: string): Promise<UserEntity | null> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: uid },
+    });
+
+    return user ? new UserEntity(user) : null;
+  }
+
   async create(user: CreateUserDTO): Promise<SafeUser> {
     // **Use PasswordService to hash the password**
     const hashedPassword = await PasswordService.hashPassword(user.password);
@@ -49,7 +57,10 @@ export class AuthRepositoryImpl implements AuthRepository {
     if (!foundUser) return null;
 
     // **Use PasswordService to compare passwords**
-    const isPasswordValid = await PasswordService.comparePassword(user.password, foundUser.password);
+    const isPasswordValid = await PasswordService.comparePassword(
+      user.password,
+      foundUser.password
+    );
     if (!isPasswordValid) return null;
 
     return foundUser;

@@ -6,5 +6,6 @@ import { SafeUser } from "../interfaces/ISafeUser.type";
 export interface AuthRepository {
   login(user: LoginDTO): Promise<SafeUser | null>;
   create(user: CreateUserDTO): Promise<SafeUser>;
+  findUserById(uid: string): Promise<UserEntity | null>;
   findUserByEmail(email: string): Promise<UserEntity | null>;
 }

@@ -9,5 +9,7 @@ const authRouter = Router();
 authRouter.post("/signup", authController.register);
 authRouter.post("/login", authController.login);
 authRouter.post("/refresh", authController.refreshToken);
+authRouter.post("/me", authController.getInfoByToken); // Get user by token / Auto-login 
+authRouter.post("/logout", authController.logout); 
 
 export default authRouter;
