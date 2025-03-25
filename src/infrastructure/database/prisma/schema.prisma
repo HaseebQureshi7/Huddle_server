@@ -50,7 +50,7 @@ model Message {
 model Canvas {
   id        String   @id @default(uuid())
   roomId    String   @unique
-  data      Json // Stores the canvas as a JSON object
+  data      Json? // Stores the canvas as a JSON object
   updatedAt DateTime @updatedAt
 
   room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)

@@ -1,4 +1,4 @@
-import { CanvasData as ICanvasData } from "@prisma/client";
+import { Canvas as ICanvasData } from "@prisma/client";
 
 export class CanvasEntity implements ICanvasData {
   id: string;
@@ -6,10 +6,10 @@ export class CanvasEntity implements ICanvasData {
   data: any;
   updatedAt: Date;
 
-  constructor(canvasData: ICanvasData) {
-    this.id = canvasData.id;
-    this.roomId = canvasData.roomId;
-    this.data = canvasData.data;
-    this.updatedAt = canvasData.updatedAt;
+  constructor(canvas: ICanvasData) {
+    this.id = canvas.id;
+    this.roomId = canvas.roomId;
+    this.data = canvas.data;
+    this.updatedAt = canvas.updatedAt;
   }
 }

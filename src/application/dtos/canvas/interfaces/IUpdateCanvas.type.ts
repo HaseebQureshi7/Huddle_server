@@ -1,4 +1,4 @@
 export interface UpdateCanvasDTOProps {
-    roomId: string;
+    cId: string;
     data: object;
 }
