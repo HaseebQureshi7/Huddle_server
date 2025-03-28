@@ -5,7 +5,7 @@ import { CanvasEntity } from "../entities/Canvas.entity";
 export interface CanvasRepository {
   findByRoomId(roomId: string): Promise<CanvasEntity | null>;
   findById(cid: string): Promise<CanvasEntity | null>;
-  update(updated_data: UpdateCanvasDTO): Promise<CanvasEntity>;
+  update(cid:string, updated_data: UpdateCanvasDTO): Promise<CanvasEntity>;
   create(data: CreateCanvasDTO): Promise<CanvasEntity>;
   delete(cid: string): Promise<CanvasEntity>;
 }

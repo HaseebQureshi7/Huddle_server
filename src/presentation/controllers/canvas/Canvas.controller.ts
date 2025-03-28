@@ -64,13 +64,22 @@ export class CanvasController {
 
   // Update canvas by Room ID
   update = catchAsync(async (req: Request, res: Response) => {
-    const { cId, data } = req.body;
+    const { id:cid } = req.params
+    const { data } = req.body;
 
-    const updateDTO = new UpdateCanvasDTO({ cId, data });
+    const updateDTO = new UpdateCanvasDTO({ data });
 
-    const updatedCanvas = await this.updateCanvasUseCase.execute(updateDTO);
+    const updatedCanvas = await this.updateCanvasUseCase.execute(
+      cid,
+      updateDTO
+    );
 
-    ResponseHandler.success(res, "Canvas updated successfully", 200, updatedCanvas);
+    ResponseHandler.success(
+      res,
+      "Canvas updated successfully",
+      200,
+      updatedCanvas
+    );
   });
 
   // Delete canvas by ID
@@ -79,6 +88,11 @@ export class CanvasController {
 
     const deletedCanvas = await this.deleteCanvasUseCase.execute(id);
 
-    ResponseHandler.success(res, "Canvas deleted successfully", 200, deletedCanvas);
+    ResponseHandler.success(
+      res,
+      "Canvas deleted successfully",
+      200,
+      deletedCanvas
+    );
   });
 }

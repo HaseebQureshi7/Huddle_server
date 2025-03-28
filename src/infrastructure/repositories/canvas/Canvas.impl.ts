@@ -26,9 +26,9 @@ export class CanvasRepositoryImpl implements CanvasRepository {
     return canvas ? new CanvasEntity(canvas) : null;
   }
 
-  async update(updated_data: UpdateCanvasDTO): Promise<CanvasEntity> {
+  async update(cid:string, updated_data: UpdateCanvasDTO): Promise<CanvasEntity> {
     const updatedCanvas = await this.prisma.canvas.update({
-      where: { id: updated_data.cId },
+      where: { id: cid },
       data: {
         data: updated_data.data,
       },

@@ -10,7 +10,7 @@ const canvasController = new CanvasController(canvasRepo);
 canvasRouter.post("/", AuthenticateUser, canvasController.create);
 canvasRouter.get("/room/:roomId", AuthenticateUser, canvasController.findByRoomId);
 canvasRouter.get("/:id", AuthenticateUser, canvasController.findById);
-canvasRouter.patch("/", AuthenticateUser, canvasController.update);
+canvasRouter.patch("/:id", AuthenticateUser, canvasController.update);
 canvasRouter.delete("/:id", AuthenticateUser, canvasController.delete);
 
 export default canvasRouter;
