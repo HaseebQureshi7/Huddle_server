@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateRoomDTO } from "../../../application/dtos/room/CreateRoom.dto";
-import { UpdateRoomDTO } from "../../../application/dtos/room/UpdateRoom.dto";
-import { RoomEntity } from "../../../domain/entities/Room.entity";
-import { RoomRepository } from "../../../domain/repositories/Room.repo";
-import { prisma as dbClient } from "../../database/client";
+import { CreateRoomDTO } from "../../../application/dtos/room/CreateRoom.dto.ts";
+import { UpdateRoomDTO } from "../../../application/dtos/room/UpdateRoom.dto.ts";
+import { RoomEntity } from "../../../domain/entities/Room.entity.ts";
+import { RoomRepository } from "../../../domain/repositories/Room.repo.ts";
+import { prisma as dbClient } from "../../database/client.ts";
 
 export class RoomRepositoryImpl implements RoomRepository {
   private prisma: PrismaClient;

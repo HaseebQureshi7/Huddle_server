@@ -1,4 +1,4 @@
-import { UpdateUserDTOProps } from "./interfaces/IUpdateUser.type";
+import { UpdateUserDTOProps } from "./interfaces/IUpdateUser.type.ts";
 
 export class UpdateUserDTO {
     public name: string;

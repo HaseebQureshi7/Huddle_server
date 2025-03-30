@@ -1,5 +1,5 @@
-import { UserEntity } from "../../../domain/entities/User.entity";
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
+import { UserEntity } from "../../../domain/entities/User.entity.ts";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
 
 export class GetUserByEmailUseCase {
   constructor(private userRepository: AuthRepository) {}

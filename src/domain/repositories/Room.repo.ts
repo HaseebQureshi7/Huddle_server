@@ -1,6 +1,6 @@
-import { CreateRoomDTO } from "../../application/dtos/room/CreateRoom.dto";
-import { UpdateRoomDTO } from "../../application/dtos/room/UpdateRoom.dto";
-import { RoomEntity } from "../entities/Room.entity";
+import { CreateRoomDTO } from "../../application/dtos/room/CreateRoom.dto.ts";
+import { UpdateRoomDTO } from "../../application/dtos/room/UpdateRoom.dto.ts";
+import { RoomEntity } from "../entities/Room.entity.ts";
 
 export interface RoomRepository {
   create(room_data: CreateRoomDTO): Promise<RoomEntity>;

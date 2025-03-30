@@ -1,5 +1,5 @@
-import { RoomRepository } from "../../../domain/repositories/Room.repo";
-import { AppError } from "../../../shared/utils/AppError";
+import { RoomRepository } from "../../../domain/repositories/Room.repo.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
 
 export class DeleteRoomUseCase {
   constructor(private roomRepository: RoomRepository) {}

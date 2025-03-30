@@ -1,4 +1,4 @@
-import { CreateCanvasDTOProps } from "./interfaces/ICreateCanvas.type";
+import { CreateCanvasDTOProps } from "./interfaces/ICreateCanvas.type.ts";
 
 export class CreateCanvasDTO {
     public roomId: string;

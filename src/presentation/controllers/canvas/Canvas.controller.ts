@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { CanvasRepository } from "../../../domain/repositories/Canvas.repo";
-import { CreateCanvasUseCase } from "../../../application/use-cases/canvas/CreateCanvas.uc";
-import { FindCanvasByRoomIdUseCase } from "../../../application/use-cases/canvas/FindCanvasByRoomId.uc";
-import { FindCanvasByIdUseCase } from "../../../application/use-cases/canvas/FindCanvasById.uc";
-import { UpdateCanvasUseCase } from "../../../application/use-cases/canvas/UpdateCanvas.uc";
-import { DeleteCanvasUseCase } from "../../../application/use-cases/canvas/DeleteCanvas.uc";
-import { ResponseHandler } from "../../../shared/utils/ResponseHandler";
-import { catchAsync } from "../../../shared/utils/CatchAsync";
-import { CreateCanvasDTO } from "../../../application/dtos/canvas/CreateCanvas.dto";
-import { UpdateCanvasDTO } from "../../../application/dtos/canvas/UpdateCanvas.dto";
+import { CanvasRepository } from "../../../domain/repositories/Canvas.repo.ts";
+import { CreateCanvasUseCase } from "../../../application/use-cases/canvas/CreateCanvas.uc.ts";
+import { FindCanvasByRoomIdUseCase } from "../../../application/use-cases/canvas/FindCanvasByRoomId.uc.ts";
+import { FindCanvasByIdUseCase } from "../../../application/use-cases/canvas/FindCanvasById.uc.ts";
+import { UpdateCanvasUseCase } from "../../../application/use-cases/canvas/UpdateCanvas.uc.ts";
+import { DeleteCanvasUseCase } from "../../../application/use-cases/canvas/DeleteCanvas.uc.ts";
+import { ResponseHandler } from "../../../shared/utils/ResponseHandler.ts";
+import { catchAsync } from "../../../shared/utils/CatchAsync.ts";
+import { CreateCanvasDTO } from "../../../application/dtos/canvas/CreateCanvas.dto.ts";
+import { UpdateCanvasDTO } from "../../../application/dtos/canvas/UpdateCanvas.dto.ts";
 
 export class CanvasController {
   private createCanvasUseCase: CreateCanvasUseCase;

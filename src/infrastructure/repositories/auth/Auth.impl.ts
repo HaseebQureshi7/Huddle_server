@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
-import { LoginDTO } from "../../../application/dtos/auth/Login.dto";
-import { CreateUserDTO } from "../../../application/dtos/auth/CreateUser.dto";
-import { UserEntity } from "../../../domain/entities/User.entity";
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
-import { prisma } from "../../database/client";
-import { PasswordService } from "../../../shared/services/PasswordService";
-import { SafeUser } from "../../../domain/interfaces/ISafeUser.type";
+import { LoginDTO } from "../../../application/dtos/auth/Login.dto.ts";
+import { CreateUserDTO } from "../../../application/dtos/auth/CreateUser.dto.ts";
+import { UserEntity } from "../../../domain/entities/User.entity.ts";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
+import { prisma } from "../../database/client.ts";
+import { PasswordService } from "../../../shared/services/PasswordService.ts";
+import { SafeUser } from "../../../domain/interfaces/ISafeUser.type.ts";
 
 export class AuthRepositoryImpl implements AuthRepository {
   private prisma: PrismaClient;

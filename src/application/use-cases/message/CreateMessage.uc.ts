@@ -1,7 +1,7 @@
-import { CreateMessageDTO } from "../../dtos/message/CreateMessage.dto";
-import { MessageRepository } from "../../../domain/repositories/Message.repo";
-import { MessageEntity } from "../../../domain/entities/Message.entity";
-import { AppError } from "../../../shared/utils/AppError";
+import { CreateMessageDTO } from "../../dtos/message/CreateMessage.dto.ts";
+import { MessageRepository } from "../../../domain/repositories/Message.repo.ts";
+import { MessageEntity } from "../../../domain/entities/Message.entity.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
 
 export class CreateMessageUseCase {
   constructor(private messageRepository: MessageRepository) {}

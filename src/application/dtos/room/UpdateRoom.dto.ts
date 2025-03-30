@@ -1,4 +1,4 @@
-import { UpdateRoomDTOProps } from "./interfaces/IUpdateRoom.type";
+import { UpdateRoomDTOProps } from "./interfaces/IUpdateRoom.type.ts";
 
 export class UpdateRoomDTO {
     public id: string;

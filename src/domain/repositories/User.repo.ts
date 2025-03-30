@@ -1,5 +1,5 @@
-import { UpdateUserDTO } from "../../application/dtos/user/UpdateUser.dto";
-import { UserEntity } from "../entities/User.entity";
+import { UpdateUserDTO } from "../../application/dtos/user/UpdateUser.dto.ts";
+import { UserEntity } from "../entities/User.entity.ts";
 
 export interface UserRepository {
   // CRUD

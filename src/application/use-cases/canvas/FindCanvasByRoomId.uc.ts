@@ -1,6 +1,6 @@
-import { CanvasRepository } from "../../../domain/repositories/Canvas.repo";
-import { CanvasEntity } from "../../../domain/entities/Canvas.entity";
-import { AppError } from "../../../shared/utils/AppError";
+import { CanvasRepository } from "../../../domain/repositories/Canvas.repo.ts";
+import { CanvasEntity } from "../../../domain/entities/Canvas.entity.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
 
 export class FindCanvasByRoomIdUseCase {
   private canvasRepository: CanvasRepository;

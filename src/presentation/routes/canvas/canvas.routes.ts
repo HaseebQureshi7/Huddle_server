@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { CanvasRepositoryImpl } from "../../../infrastructure/repositories/canvas/Canvas.impl";
-import { CanvasController } from "../../controllers/canvas/Canvas.controller";
-import { AuthenticateUser } from "../../../shared/middlewares/auth.middleware";
+import { CanvasRepositoryImpl } from "../../../infrastructure/repositories/canvas/Canvas.impl.ts";
+import { CanvasController } from "../../controllers/canvas/Canvas.controller.ts";
+import { AuthenticateUser } from "../../../shared/middlewares/auth.middleware.ts";
 
 const canvasRouter = Router();
 const canvasRepo = new CanvasRepositoryImpl();

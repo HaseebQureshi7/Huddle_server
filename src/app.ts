@@ -2,9 +2,9 @@ import cors from "cors";
 import { config } from "dotenv";
 import express, { json, urlencoded } from "express";
 import helmet from "helmet";
-import { corsOptions } from "./infrastructure/config/corsOptions.config";
-import appRouter from "./presentation/routes/index.routes";
-import { globalErrorHandler } from "./shared/utils/GlobalErrorHandler";
+import { corsOptions } from "./infrastructure/config/corsOptions.config.ts";
+import appRouter from "./presentation/routes/index.routes.ts";
+import { globalErrorHandler } from "./shared/utils/GlobalErrorHandler.ts";
 import cookieParser from 'cookie-parser';
 
 config();

@@ -1,4 +1,4 @@
-import { JwtService } from "../../../infrastructure/services/JWT.service";
+import { JwtService } from "../../../infrastructure/services/JWT.service.ts";
 
 export class RefreshTokenUseCase {
   async execute(refreshToken: string): Promise<{ accessToken: string; refreshToken: string }> {

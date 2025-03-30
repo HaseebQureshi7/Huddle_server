@@ -1,7 +1,7 @@
-import { LoginDTO } from "../../application/dtos/auth/Login.dto";
-import { CreateUserDTO } from "../../application/dtos/auth/CreateUser.dto";
-import { UserEntity } from "../entities/User.entity";
-import { SafeUser } from "../interfaces/ISafeUser.type";
+import { LoginDTO } from "../../application/dtos/auth/Login.dto.ts";
+import { CreateUserDTO } from "../../application/dtos/auth/CreateUser.dto.ts";
+import { UserEntity } from "../entities/User.entity.ts";
+import { SafeUser } from "../interfaces/ISafeUser.type.ts";
 
 export interface AuthRepository {
   login(user: LoginDTO): Promise<SafeUser | null>;

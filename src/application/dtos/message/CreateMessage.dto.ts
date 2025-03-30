@@ -1,4 +1,4 @@
-import { CreateMessageDTOProps } from "./interfaces/ICreateMessage.type";
+import { CreateMessageDTOProps } from "./interfaces/ICreateMessage.type.ts";
 
 export class CreateMessageDTO {
     public userId: string;

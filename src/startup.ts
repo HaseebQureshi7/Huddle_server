@@ -1,4 +1,4 @@
-import { ConsoleUtil } from "./shared/utils/Console";
+import { ConsoleUtil } from "./shared/utils/Console.ts";
 
 async function startup() {
   const consoleUtil = new ConsoleUtil();

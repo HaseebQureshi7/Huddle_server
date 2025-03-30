@@ -1,5 +1,5 @@
-import { EmailAddress } from "../../../domain/value-objects/EmailAddress.vo";
-import { LoginDTOProps } from "./interfaces/ILogin.type";
+import { EmailAddress } from "../../../domain/value-objects/EmailAddress.vo.ts";
+import { LoginDTOProps } from "./interfaces/ILogin.type.ts";
 
 export class LoginDTO {
   public email: EmailAddress;

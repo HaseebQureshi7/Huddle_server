@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { JwtService } from "../../infrastructure/services/JWT.service";
+import { JwtService } from "../../infrastructure/services/JWT.service.ts";
 
 // Extend Express Request type to include `userId`
 declare module "express-serve-static-core" {

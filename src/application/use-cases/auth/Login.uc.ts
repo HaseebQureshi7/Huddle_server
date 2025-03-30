@@ -1,7 +1,7 @@
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
-import { JwtService } from "../../../infrastructure/services/JWT.service";
-import { AppError } from "../../../shared/utils/AppError";
-import { LoginDTO } from "../../dtos/auth/Login.dto";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
+import { JwtService } from "../../../infrastructure/services/JWT.service.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
+import { LoginDTO } from "../../dtos/auth/Login.dto.ts";
 
 export class LoginUseCase {
   constructor(private authRepository: AuthRepository) {}

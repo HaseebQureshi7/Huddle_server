@@ -1,7 +1,7 @@
-import { JwtService } from './../../../infrastructure/services/JWT.service';
-import { UserEntity } from "../../../domain/entities/User.entity";
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
-import { AppError } from '../../../shared/utils/AppError';
+import { JwtService } from './../../../infrastructure/services/JWT.service.ts';
+import { UserEntity } from "../../../domain/entities/User.entity.ts";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
+import { AppError } from '../../../shared/utils/AppError.ts';
 
 interface IGetInfoByToken {
     refreshToken: string;

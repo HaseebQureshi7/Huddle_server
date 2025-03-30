@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateMessageDTO } from "../../../application/dtos/message/CreateMessage.dto";
-import { MessageEntity } from "../../../domain/entities/Message.entity";
-import { MessageRepository } from "../../../domain/repositories/Message.repo";
-import { prisma } from "../../database/client";
+import { CreateMessageDTO } from "../../../application/dtos/message/CreateMessage.dto.ts";
+import { MessageEntity } from "../../../domain/entities/Message.entity.ts";
+import { MessageRepository } from "../../../domain/repositories/Message.repo.ts";
+import { prisma } from "../../database/client.ts";
 
 export class MessageRepositoryImpl implements MessageRepository {
   private prisma: PrismaClient;

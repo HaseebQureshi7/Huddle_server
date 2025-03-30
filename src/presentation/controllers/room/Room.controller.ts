@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { CreateRoomDTO } from "../../../application/dtos/room/CreateRoom.dto";
-import { UpdateRoomDTO } from "../../../application/dtos/room/UpdateRoom.dto";
-import { RoomRepository } from "../../../domain/repositories/Room.repo";
-import { ResponseHandler } from "../../../shared/utils/ResponseHandler";
-import { catchAsync } from "../../../shared/utils/CatchAsync";
-import { CreateRoomUseCase } from "../../../application/use-cases/room/CreateRoom.uc";
-import { DeleteRoomUseCase } from "../../../application/use-cases/room/DeleteRoom.uc";
-import { FindRoomByIdUseCase } from "../../../application/use-cases/room/FindRoomById.uc";
-import { UpdateRoomUseCase } from "../../../application/use-cases/room/UpdateRoom.uc";
+import { CreateRoomDTO } from "../../../application/dtos/room/CreateRoom.dto.ts";
+import { UpdateRoomDTO } from "../../../application/dtos/room/UpdateRoom.dto.ts";
+import { RoomRepository } from "../../../domain/repositories/Room.repo.ts";
+import { ResponseHandler } from "../../../shared/utils/ResponseHandler.ts";
+import { catchAsync } from "../../../shared/utils/CatchAsync.ts";
+import { CreateRoomUseCase } from "../../../application/use-cases/room/CreateRoom.uc.ts";
+import { DeleteRoomUseCase } from "../../../application/use-cases/room/DeleteRoom.uc.ts";
+import { FindRoomByIdUseCase } from "../../../application/use-cases/room/FindRoomById.uc.ts";
+import { UpdateRoomUseCase } from "../../../application/use-cases/room/UpdateRoom.uc.ts";
 
 export class RoomController {
   private createRoomUseCase: CreateRoomUseCase;

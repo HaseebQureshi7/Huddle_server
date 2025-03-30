@@ -1,5 +1,5 @@
-import { EmailAddress } from "../../../domain/value-objects/EmailAddress.vo";
-import { CreateUserDTOProps } from "./interfaces/ICreateUser.type";
+import { EmailAddress } from "../../../domain/value-objects/EmailAddress.vo.ts";
+import { CreateUserDTOProps } from "./interfaces/ICreateUser.type.ts";
 
 export class CreateUserDTO {
     public name: string;

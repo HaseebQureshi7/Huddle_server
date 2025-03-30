@@ -1,7 +1,7 @@
-import { UserEntity } from "../../../domain/entities/User.entity";
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
-import { UserRepository } from "../../../domain/repositories/User.repo";
-import { AppError } from "../../../shared/utils/AppError";
+import { UserEntity } from "../../../domain/entities/User.entity.ts";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
+import { UserRepository } from "../../../domain/repositories/User.repo.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
 
 export class ViewUserByIdUseCase {
   constructor(private userRepository: AuthRepository) {}

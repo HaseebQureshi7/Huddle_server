@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { MessageRepository } from "../../../domain/repositories/Message.repo";
-import { CreateMessageUseCase } from "../../../application/use-cases/message/CreateMessage.uc";
-import { FindMessageUseCase } from "../../../application/use-cases/message/FindMessage.uc";
-import { DeleteMessageUseCase } from "../../../application/use-cases/message/DeleteMessage.uc";
-import { GetMessagesByRoomUseCase } from "../../../application/use-cases/message/GetAllMessagesByRoom.uc";
-import { ResponseHandler } from "../../../shared/utils/ResponseHandler";
-import { catchAsync } from "../../../shared/utils/CatchAsync";
-import { CreateMessageDTO } from "../../../application/dtos/message/CreateMessage.dto";
+import { MessageRepository } from "../../../domain/repositories/Message.repo.ts";
+import { CreateMessageUseCase } from "../../../application/use-cases/message/CreateMessage.uc.ts";
+import { FindMessageUseCase } from "../../../application/use-cases/message/FindMessage.uc.ts";
+import { DeleteMessageUseCase } from "../../../application/use-cases/message/DeleteMessage.uc.ts";
+import { GetMessagesByRoomUseCase } from "../../../application/use-cases/message/GetAllMessagesByRoom.uc.ts";
+import { ResponseHandler } from "../../../shared/utils/ResponseHandler.ts";
+import { catchAsync } from "../../../shared/utils/CatchAsync.ts";
+import { CreateMessageDTO } from "../../../application/dtos/message/CreateMessage.dto.ts";
 
 export class MessageController {
   private createMessageUseCase: CreateMessageUseCase;

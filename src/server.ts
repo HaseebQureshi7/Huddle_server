@@ -1,9 +1,9 @@
 // src/server.ts
 import { createServer } from "http";
 import { Server as SocketServer } from "socket.io";
-import app from "./app";
-import startup from "./startup";
-import { initializeSocket } from "./infrastructure/web-sockets/socketHandler";
+import app from "./app.ts";
+import startup from "./startup.ts";
+import { initializeSocket } from "./infrastructure/web-sockets/socketHandler.ts";
 
 const PORT = process.env.PORT || 3001;
 

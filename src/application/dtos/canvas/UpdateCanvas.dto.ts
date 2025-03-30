@@ -1,4 +1,4 @@
-import { UpdateCanvasDTOProps } from "./interfaces/IUpdateCanvas.type";
+import { UpdateCanvasDTOProps } from "./interfaces/IUpdateCanvas.type.ts";
 
 export class UpdateCanvasDTO {
     public data: object;

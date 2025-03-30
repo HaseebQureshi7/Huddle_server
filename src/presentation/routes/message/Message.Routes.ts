@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { MessageRepositoryImpl } from "../../../infrastructure/repositories/message/Message.impl";
-import { MessageController } from "../../controllers/message/Message.controller";
-import { AuthenticateUser } from "../../../shared/middlewares/auth.middleware";
+import { MessageRepositoryImpl } from "../../../infrastructure/repositories/message/Message.impl.ts";
+import { MessageController } from "../../controllers/message/Message.controller.ts";
+import { AuthenticateUser } from "../../../shared/middlewares/auth.middleware.ts";
 
 const messageRouter = Router();
 const messageRepo = new MessageRepositoryImpl();

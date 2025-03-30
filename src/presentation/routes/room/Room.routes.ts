@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { RoomRepositoryImpl } from "../../../infrastructure/repositories/room/Room.impl";
-import { RoomController } from "../../controllers/room/Room.controller";
-import { AuthenticateUser } from "../../../shared/middlewares/auth.middleware";
+import { RoomRepositoryImpl } from "../../../infrastructure/repositories/room/Room.impl.ts";
+import { RoomController } from "../../controllers/room/Room.controller.ts";
+import { AuthenticateUser } from "../../../shared/middlewares/auth.middleware.ts";
 
 const roomRouter = Router();
 const roomRepo = new RoomRepositoryImpl();

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { prisma } from "../../../infrastructure/database/client";
+import { prisma } from "../../../infrastructure/database/client.ts";
 
 const healthRouter = Router();
 

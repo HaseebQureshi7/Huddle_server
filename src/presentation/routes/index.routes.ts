@@ -1,9 +1,9 @@
 import { Router } from "express";
-import healthRouter from "./health/health.routes";
-import authRouter from "./auth/Auth.routes";
-import roomRouter from "./room/Room.routes";
-import messageRouter from "./message/Message.Routes";
-import canvasRouter from "./canvas/canvas.routes";
+import healthRouter from "./health/health.routes.ts";
+import authRouter from "./auth/Auth.routes.ts";
+import roomRouter from "./room/Room.routes.ts";
+import messageRouter from "./message/Message.Routes.ts";
+import canvasRouter from "./canvas/canvas.routes.ts";
 
 const appRouter = Router();
 

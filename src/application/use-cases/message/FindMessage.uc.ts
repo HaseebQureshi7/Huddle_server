@@ -1,6 +1,6 @@
-import { MessageRepository } from "../../../domain/repositories/Message.repo";
-import { MessageEntity } from "../../../domain/entities/Message.entity";
-import { AppError } from "../../../shared/utils/AppError";
+import { MessageRepository } from "../../../domain/repositories/Message.repo.ts";
+import { MessageEntity } from "../../../domain/entities/Message.entity.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
 
 export class FindMessageUseCase {
   constructor(private messageRepository: MessageRepository) {}

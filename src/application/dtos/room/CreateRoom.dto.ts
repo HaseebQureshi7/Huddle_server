@@ -1,4 +1,4 @@
-import { CreateRoomDTOProps } from "./interfaces/ICreateRoom.type";
+import { CreateRoomDTOProps } from "./interfaces/ICreateRoom.type.ts";
 
 export class CreateRoomDTO {
     public name: string;

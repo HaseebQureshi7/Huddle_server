@@ -1,7 +1,7 @@
-import { CreateUserDTO } from "../../dtos/auth/CreateUser.dto";
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
-import { AppError } from "../../../shared/utils/AppError";
-import { SafeUser } from "../../../domain/interfaces/ISafeUser.type";
+import { CreateUserDTO } from "../../dtos/auth/CreateUser.dto.ts";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
+import { SafeUser } from "../../../domain/interfaces/ISafeUser.type.ts";
 
 export class CreateUserUseCase {
   constructor(private userRepository: AuthRepository) {}

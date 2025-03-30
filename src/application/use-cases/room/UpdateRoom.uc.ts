@@ -1,7 +1,7 @@
-import { RoomRepository } from "../../../domain/repositories/Room.repo";
-import { AppError } from "../../../shared/utils/AppError";
-import { UpdateRoomDTO } from "../../dtos/room/UpdateRoom.dto";
-import { RoomEntity } from "../../../domain/entities/Room.entity";
+import { RoomRepository } from "../../../domain/repositories/Room.repo.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
+import { UpdateRoomDTO } from "../../dtos/room/UpdateRoom.dto.ts";
+import { RoomEntity } from "../../../domain/entities/Room.entity.ts";
 
 export class UpdateRoomUseCase {
   constructor(private roomRepository: RoomRepository) {}

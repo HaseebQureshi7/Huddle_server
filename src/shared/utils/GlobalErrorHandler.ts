@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../utils/AppError"; // Import the custom error class
+import { AppError } from "../utils/AppError.ts"; // Import the custom error class
 
 export const globalErrorHandler = (
   err: AppError,

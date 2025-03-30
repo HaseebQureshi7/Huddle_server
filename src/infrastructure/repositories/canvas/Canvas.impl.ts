@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { CanvasRepository } from "../../../domain/repositories/Canvas.repo";
-import { CreateCanvasDTO } from "../../../application/dtos/canvas/CreateCanvas.dto";
-import { UpdateCanvasDTO } from "../../../application/dtos/canvas/UpdateCanvas.dto";
-import { CanvasEntity } from "../../../domain/entities/Canvas.entity";
-import { prisma } from "../../database/client"; // Prisma Client
+import { CanvasRepository } from "../../../domain/repositories/Canvas.repo.ts";
+import { CreateCanvasDTO } from "../../../application/dtos/canvas/CreateCanvas.dto.ts";
+import { UpdateCanvasDTO } from "../../../application/dtos/canvas/UpdateCanvas.dto.ts";
+import { CanvasEntity } from "../../../domain/entities/Canvas.entity.ts";
+import { prisma } from "../../database/client.ts"; // Prisma Client
 
 export class CanvasRepositoryImpl implements CanvasRepository {
   private prisma: PrismaClient;

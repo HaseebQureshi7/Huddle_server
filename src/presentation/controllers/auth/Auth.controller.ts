@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { CreateUserDTO } from "../../../application/dtos/auth/CreateUser.dto";
-import { LoginDTO } from "../../../application/dtos/auth/Login.dto";
-import { EmailAddress } from "../../../domain/value-objects/EmailAddress.vo";
-import { ResponseHandler } from "../../../shared/utils/ResponseHandler";
-import { LoginUseCase } from "../../../application/use-cases/auth/Login.uc";
-import { AuthRepository } from "../../../domain/repositories/Auth.repo";
-import { CreateUserUseCase } from "../../../application/use-cases/auth/CreateUser.uc";
-import { catchAsync } from "../../../shared/utils/CatchAsync";
-import { RefreshTokenUseCase } from "../../../application/use-cases/user/RefreshToken.uc";
-import { cookieOptions } from "../../../infrastructure/config/cookieOptions.config";
-import { GetInfoByTokenUseCase } from "../../../application/use-cases/auth/GetInfoByToken.uc";
-import { ViewUserByIdUseCase } from "../../../application/use-cases/user/ViewUserById.uc";
+import { CreateUserDTO } from "../../../application/dtos/auth/CreateUser.dto.ts";
+import { LoginDTO } from "../../../application/dtos/auth/Login.dto.ts";
+import { EmailAddress } from "../../../domain/value-objects/EmailAddress.vo.ts";
+import { ResponseHandler } from "../../../shared/utils/ResponseHandler.ts";
+import { LoginUseCase } from "../../../application/use-cases/auth/Login.uc.ts";
+import { AuthRepository } from "../../../domain/repositories/Auth.repo.ts";
+import { CreateUserUseCase } from "../../../application/use-cases/auth/CreateUser.uc.ts";
+import { catchAsync } from "../../../shared/utils/CatchAsync.ts";
+import { RefreshTokenUseCase } from "../../../application/use-cases/user/RefreshToken.uc.ts";
+import { cookieOptions } from "../../../infrastructure/config/cookieOptions.config.ts";
+import { GetInfoByTokenUseCase } from "../../../application/use-cases/auth/GetInfoByToken.uc.ts";
+import { ViewUserByIdUseCase } from "../../../application/use-cases/user/ViewUserById.uc.ts";
 
 export class AuthController {
   private loginUseCase: LoginUseCase;

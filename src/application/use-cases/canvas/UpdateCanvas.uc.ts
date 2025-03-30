@@ -1,7 +1,7 @@
-import { CanvasRepository } from "../../../domain/repositories/Canvas.repo";
-import { CanvasEntity } from "../../../domain/entities/Canvas.entity";
-import { UpdateCanvasDTO } from "../../dtos/canvas/UpdateCanvas.dto";
-import { AppError } from "../../../shared/utils/AppError";
+import { CanvasRepository } from "../../../domain/repositories/Canvas.repo.ts";
+import { CanvasEntity } from "../../../domain/entities/Canvas.entity.ts";
+import { UpdateCanvasDTO } from "../../dtos/canvas/UpdateCanvas.dto.ts";
+import { AppError } from "../../../shared/utils/AppError.ts";
 
 export class UpdateCanvasUseCase {
   private canvasRepository: CanvasRepository;

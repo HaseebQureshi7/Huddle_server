@@ -1,4 +1,4 @@
-import { EmailAddress } from "../../../../domain/value-objects/EmailAddress.vo";
+import { EmailAddress } from "../../../../domain/value-objects/EmailAddress.vo.ts";
 
 export interface CreateUserDTOProps {
   name: string;
