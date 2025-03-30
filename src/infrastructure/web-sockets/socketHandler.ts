@@ -1,40 +1,79 @@
 import { Server, Socket } from "socket.io";
 
-const rooms: Record<string, { sockets: Map<string, string>; users: Set<string> }> = {}; 
+interface Member {
+  id: string;
+  name: string;
+}
+
+interface Room {
+  sockets: Map<string, string>; // Maps socket.id -> userId
+  users: Member[]; // Array of member objects
+}
+
+const rooms: Record<string, Room> = {};
 
 export const initializeSocket = (io: Server) => {
   io.on("connection", (socket: Socket) => {
     console.log("Client connected:", socket.id);
 
-    socket.on("join-room", ({ roomId, userId }) => {
+    socket.on("join-room", ({ roomId, userId, userName }) => {
       if (!rooms[roomId]) {
-        rooms[roomId] = { sockets: new Map(), users: new Set() };
+        rooms[roomId] = { sockets: new Map(), users: [] };
+      }
+      
+      // Add member details if not already present
+      if (!rooms[roomId].users.find((member) => member.id === userId)) {
+        rooms[roomId].users.push({ id: userId, name: userName });
       }
 
-      if (!rooms[roomId].users.has(userId)) {
-        rooms[roomId].users.add(userId);
-      }
-
+      // Map this socket to the user
       rooms[roomId].sockets.set(socket.id, userId);
       socket.join(roomId);
-      console.log(`User ${userId} joined room ${roomId}`);
-      console.log(`Room ${roomId} has ${rooms[roomId].users.size} members`);
+      
+      console.log(`User ${userId} (${userName}) joined room ${roomId}`);
+      console.log(`Room ${roomId} has ${rooms[roomId].users.length} members`);
+      
+      // Emit updated room members with full details
+      io.to(roomId).emit("room-members", { members: rooms[roomId].users });
+    });
 
-      io.to(roomId).emit("room-members", { members: Array.from(rooms[roomId].users) });
+    socket.on("offer", ({ roomId, senderId, receiverId, sdp }) => {
+      socket.to(roomId).emit("offer", { senderId, sdp, receiverId });
+    });
+
+    socket.on("answer", ({ roomId, senderId, receiverId, sdp }) => {
+      socket.to(roomId).emit("answer", { senderId, sdp, receiverId });
+    });
+
+    socket.on("ice-candidate", ({ roomId, senderId, receiverId, candidate }) => {
+      socket.to(roomId).emit("ice-candidate", { senderId, candidate, receiverId });
+    });
+
+    // New: handle mute-status events
+    socket.on("mute-status", ({ roomId, userId, muted }) => {
+      socket.to(roomId).emit("mute-status", { userId, muted });
+    });
+
+    // New: handle video-status events
+    socket.on("video-status", ({ roomId, userId, videoOn }) => {
+      socket.to(roomId).emit("video-status", { userId, videoOn });
     });
 
     socket.on("disconnect", () => {
       let removedUserId: string | undefined;
       let roomIdToUpdate: string | undefined;
 
+      // Remove the socket from the room
       for (const roomId in rooms) {
         if (rooms[roomId].sockets.has(socket.id)) {
-          removedUserId = rooms[roomId].sockets.get(socket.id);
+          removedUserId = rooms[roomId].sockets.get(socket.id)!;
           rooms[roomId].sockets.delete(socket.id);
 
-          const stillConnected = Array.from(rooms[roomId].sockets.values()).includes(removedUserId!);
+          // Check if any socket in this room still belongs to the user
+          const stillConnected = Array.from(rooms[roomId].sockets.values()).includes(removedUserId);
           if (!stillConnected && removedUserId) {
-            rooms[roomId].users.delete(removedUserId);
+            // Remove member details if this was the last connection
+            rooms[roomId].users = rooms[roomId].users.filter(member => member.id !== removedUserId);
           }
 
           roomIdToUpdate = roomId;
@@ -43,9 +82,7 @@ export const initializeSocket = (io: Server) => {
       }
 
       if (roomIdToUpdate) {
-        io.to(roomIdToUpdate).emit("room-members", {
-          members: Array.from(rooms[roomIdToUpdate].users),
-        });
+        io.to(roomIdToUpdate).emit("room-members", { members: rooms[roomIdToUpdate].users });
       }
 
       console.log("Client disconnected:", socket.id);

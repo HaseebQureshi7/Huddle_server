@@ -10,17 +10,20 @@ import { catchAsync } from "../../../shared/utils/CatchAsync";
 import { RefreshTokenUseCase } from "../../../application/use-cases/user/RefreshToken.uc";
 import { cookieOptions } from "../../../infrastructure/config/cookieOptions.config";
 import { GetInfoByTokenUseCase } from "../../../application/use-cases/auth/GetInfoByToken.uc";
+import { ViewUserByIdUseCase } from "../../../application/use-cases/user/ViewUserById.uc";
 
 export class AuthController {
   private loginUseCase: LoginUseCase;
   private registerUseCase: CreateUserUseCase;
   private refreshTokenUseCase: RefreshTokenUseCase;
+  private viewUserById: ViewUserByIdUseCase;
   private getInfoByTokenUseCase: GetInfoByTokenUseCase;
 
   constructor(authRepo: AuthRepository) {
     this.loginUseCase = new LoginUseCase(authRepo);
     this.registerUseCase = new CreateUserUseCase(authRepo);
     this.refreshTokenUseCase = new RefreshTokenUseCase();
+    this.viewUserById = new ViewUserByIdUseCase(authRepo);
     this.getInfoByTokenUseCase = new GetInfoByTokenUseCase(authRepo);
   }
 
@@ -102,6 +105,13 @@ export class AuthController {
       accessToken,
       refreshToken,
     });
+  });
+
+  findUserById = catchAsync(async (req: Request, res: Response) => {
+    const uid = req.params.id;
+    const user = await this.viewUserById.execute(uid);
+
+    ResponseHandler.success(res, "User found!", 200, user);
   });
 
   // no usecase logic needed for this controller
