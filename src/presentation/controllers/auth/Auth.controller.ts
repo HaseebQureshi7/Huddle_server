@@ -116,8 +116,17 @@ export class AuthController {
 
   // no usecase logic needed for this controller
   logout = catchAsync(async (req: Request, res: Response) => {
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: true, // Required for HTTPS
+      sameSite: "none", // Necessary for cross-origin requests
+    });
+    
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     return ResponseHandler.success(res, "User successfully logged out", 200);
   });
