@@ -59,6 +59,14 @@ export const initializeSocket = (io: Server) => {
       socket.to(roomId).emit("video-status", { userId, videoOn });
     });
 
+    // New Canvas State Message
+    socket.on("new-canvas-state", ({ roomId, canvasState }) => {
+      console.log("New canvas state received for Room:", roomId);
+  
+      // Broadcast to other users in the room
+      socket.to(roomId).emit("new-canvas-state", canvasState);
+    });
+
     socket.on("disconnect", () => {
       let removedUserId: string | undefined;
       let roomIdToUpdate: string | undefined;
