@@ -20,7 +20,7 @@ export const initializeSocket = (io: Server) => {
       if (!rooms[roomId]) {
         rooms[roomId] = { sockets: new Map(), users: [] };
       }
-      
+
       // Add member details if not already present
       if (!rooms[roomId].users.find((member) => member.id === userId)) {
         rooms[roomId].users.push({ id: userId, name: userName });
@@ -29,10 +29,10 @@ export const initializeSocket = (io: Server) => {
       // Map this socket to the user
       rooms[roomId].sockets.set(socket.id, userId);
       socket.join(roomId);
-      
+
       console.log(`User ${userId} (${userName}) joined room ${roomId}`);
       console.log(`Room ${roomId} has ${rooms[roomId].users.length} members`);
-      
+
       // Emit updated room members with full details
       io.to(roomId).emit("room-members", { members: rooms[roomId].users });
     });
@@ -45,9 +45,14 @@ export const initializeSocket = (io: Server) => {
       socket.to(roomId).emit("answer", { senderId, sdp, receiverId });
     });
 
-    socket.on("ice-candidate", ({ roomId, senderId, receiverId, candidate }) => {
-      socket.to(roomId).emit("ice-candidate", { senderId, candidate, receiverId });
-    });
+    socket.on(
+      "ice-candidate",
+      ({ roomId, senderId, receiverId, candidate }) => {
+        socket
+          .to(roomId)
+          .emit("ice-candidate", { senderId, candidate, receiverId });
+      }
+    );
 
     // New: handle mute-status events
     socket.on("mute-status", ({ roomId, userId, muted }) => {
@@ -62,9 +67,25 @@ export const initializeSocket = (io: Server) => {
     // New Canvas State Message
     socket.on("new-canvas-state", ({ roomId, canvasState }) => {
       console.log("New canvas state received for Room:", roomId);
-  
+
       // Broadcast to other users in the room
       socket.to(roomId).emit("new-canvas-state", canvasState);
+    });
+
+    // Canvas Started Message
+    socket.on("new-canvas-start", ({ roomId }) => {
+      console.log("New canvas started message received for Room:", roomId);
+
+      // Broadcast to other users in the room
+      socket.to(roomId).emit("new-canvas-started");
+    });
+
+    // No-Canvas Mode Message
+    socket.on("no-canvas-mode", ({ roomId }) => {
+      console.log("No canvas mode has been started received for Room:", roomId);
+
+      // Broadcast to other users in the room
+      socket.to(roomId).emit("no-canvas-mode");
     });
 
     socket.on("disconnect", () => {
@@ -78,10 +99,14 @@ export const initializeSocket = (io: Server) => {
           rooms[roomId].sockets.delete(socket.id);
 
           // Check if any socket in this room still belongs to the user
-          const stillConnected = Array.from(rooms[roomId].sockets.values()).includes(removedUserId);
+          const stillConnected = Array.from(
+            rooms[roomId].sockets.values()
+          ).includes(removedUserId);
           if (!stillConnected && removedUserId) {
             // Remove member details if this was the last connection
-            rooms[roomId].users = rooms[roomId].users.filter(member => member.id !== removedUserId);
+            rooms[roomId].users = rooms[roomId].users.filter(
+              (member) => member.id !== removedUserId
+            );
           }
 
           roomIdToUpdate = roomId;
@@ -90,7 +115,9 @@ export const initializeSocket = (io: Server) => {
       }
 
       if (roomIdToUpdate) {
-        io.to(roomIdToUpdate).emit("room-members", { members: rooms[roomIdToUpdate].users });
+        io.to(roomIdToUpdate).emit("room-members", {
+          members: rooms[roomIdToUpdate].users,
+        });
       }
 
       console.log("Client disconnected:", socket.id);
