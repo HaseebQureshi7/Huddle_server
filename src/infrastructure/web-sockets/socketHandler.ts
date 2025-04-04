@@ -88,6 +88,16 @@ export const initializeSocket = (io: Server) => {
       socket.to(roomId).emit("no-canvas-mode");
     });
 
+    // When a stroke is received, broadcast it
+    socket.on("canvas-stroke", ({ roomId, stroke }) => {
+      socket.to(roomId).emit("canvas-stroke", { roomId, stroke });
+    });
+
+    // When canvas is cleared, broadcast it
+    socket.on("canvas-clear", ({ roomId }) => {
+      socket.to(roomId).emit("canvas-clear", { roomId });
+    });
+
     socket.on("disconnect", () => {
       let removedUserId: string | undefined;
       let roomIdToUpdate: string | undefined;
