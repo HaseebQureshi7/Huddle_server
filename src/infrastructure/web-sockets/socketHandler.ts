@@ -38,28 +38,43 @@ export const initializeSocket = (io: Server) => {
     });
 
     socket.on("offer", ({ roomId, senderId, receiverId, sdp }) => {
+      // Broadcast the offer to everyone in the room except sender
       socket.to(roomId).emit("offer", { senderId, sdp, receiverId });
     });
 
+    // Updated answer event: target only the intended receiver
     socket.on("answer", ({ roomId, senderId, receiverId, sdp }) => {
-      socket.to(roomId).emit("answer", { senderId, sdp, receiverId });
+      const room = rooms[roomId];
+      if (!room) return;
+      let targetSocketId: string | null = null;
+      for (const [socketId, userId] of room.sockets.entries()) {
+        if (userId === receiverId) {
+          targetSocketId = socketId;
+          break;
+        }
+      }
+      if (targetSocketId) {
+        io.to(targetSocketId).emit("answer", { senderId, sdp, receiverId });
+      } else {
+        console.warn("Receiver not found for user", receiverId);
+      }
     });
 
     socket.on(
       "ice-candidate",
       ({ roomId, senderId, receiverId, candidate }) => {
-        socket
-          .to(roomId)
-          .emit("ice-candidate", { senderId, candidate, receiverId });
+        // Optionally, you could target the receiver similar to the answer event.
+        // For now, we'll broadcast to the room:
+        socket.to(roomId).emit("ice-candidate", { senderId, candidate, receiverId });
       }
     );
 
-    // New: handle mute-status events
+    // Handle mute-status events
     socket.on("mute-status", ({ roomId, userId, muted }) => {
       socket.to(roomId).emit("mute-status", { userId, muted });
     });
 
-    // New: handle video-status events
+    // Handle video-status events
     socket.on("video-status", ({ roomId, userId, videoOn }) => {
       socket.to(roomId).emit("video-status", { userId, videoOn });
     });
@@ -67,24 +82,18 @@ export const initializeSocket = (io: Server) => {
     // New Canvas State Message
     socket.on("new-canvas-state", ({ roomId, canvasState }) => {
       console.log("New canvas state received for Room:", roomId);
-
-      // Broadcast to other users in the room
       socket.to(roomId).emit("new-canvas-state", canvasState);
     });
 
     // Canvas Started Message
     socket.on("new-canvas-start", ({ roomId }) => {
       console.log("New canvas started message received for Room:", roomId);
-
-      // Broadcast to other users in the room
       socket.to(roomId).emit("new-canvas-started");
     });
 
     // No-Canvas Mode Message
     socket.on("no-canvas-mode", ({ roomId }) => {
       console.log("No canvas mode has been started received for Room:", roomId);
-
-      // Broadcast to other users in the room
       socket.to(roomId).emit("no-canvas-mode");
     });
 
